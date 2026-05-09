@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дневник фронтовика — Шелковников Сергей Сергеевич</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1409;
+  --paper:#f7edd8;
+  --paper-dark:#e8d5b0;
+  --paper-mid:#f0e0c0;
+  --graphite:#1a1a18;
+  --graphite-mid:#2e2d2a;
+  --graphite-light:#3d3c38;
+  --red:#7a1a1a;
+  --red-light:#a02020;
+  --gold:#c49a3a;
+  --text-muted:#6b5a3e;
+  --shadow:rgba(0,0,0,0.45);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--graphite);color:var(--paper);font-family:'EB Garamond',Georgia,serif;line-height:1.7;overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--graphite)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px}
+
+/* NAVIGATION */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(26,26,24,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(196,154,58,0.25);transition:background 0.3s}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);letter-spacing:0.05em;text-decoration:none}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{color:var(--paper-dark);text-decoration:none;font-family:'Oswald',sans-serif;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s;padding:0.2rem 0;border-bottom:1px solid transparent}
+.nav-links a:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+.nav-burger span{display:block;width:24px;height:2px;background:var(--paper);transition:all 0.3s}
+
+/* HERO */
+#hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-image:url('./images/Hero.jpg');background-size:cover;background-position:center top;filter:brightness(0.45) sepia(0.3)}
+.hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.5;pointer-events:none}
+.hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%)}
+.hero-overlay{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom,transparent,var(--graphite))}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2rem;max-width:800px}
+.hero-date{font-family:'Oswald',sans-serif;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;opacity:0.9}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:900;line-height:1.05;margin-bottom:0.6rem;text-shadow:0 2px 20px rgba(0,0,0,0.8)}
+.hero-subtitle{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,3vw,2rem);font-weight:400;font-style:italic;color:var(--paper-dark);margin-bottom:1.8rem}
+.hero-desc{font-size:1.05rem;color:rgba(247,237,216,0.75);max-width:500px;margin:0 auto 2.5rem;line-height:1.8}
+.btn-primary{display:inline-block;padding:0.85rem 2.5rem;border:1px solid var(--gold);color:var(--gold);font-family:'Oswald',sans-serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
+.btn-primary:hover{color:var(--graphite)}
+.btn-primary:hover::before{transform:scaleX(1)}
+.btn-primary span{position:relative;z-index:1}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.5rem;opacity:0.6}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollpulse 2s ease-in-out infinite}
+@keyframes scrollpulse{0%,100%{opacity:0.6}50%{opacity:1}}
+
+/* SECTIONS */
+section{position:relative}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-label{display:inline-block;font-family:'Oswald',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;padding:0.3rem 1rem;border:1px solid rgba(196,154,58,0.4)}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.15}
+.section-divider{width:60px;height:2px;background:var(--red);margin:1.2rem auto 0}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+/* ABOUT */
+#about{padding:6rem 0;background:var(--graphite)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-photo{position:relative}
+.about-photo img{width:100%;max-width:420px;display:block;border:3px solid var(--paper-dark);box-shadow:8px 8px 0 var(--red),16px 16px 0 rgba(122,26,26,0.3);filter:sepia(0.3) contrast(1.05)}
+.about-photo-caption{position:absolute;bottom:-1.5rem;right:-1rem;background:var(--red);color:var(--paper);font-family:'Oswald',sans-serif;font-size:0.7rem;letter-spacing:0.1em;padding:0.4rem 0.8rem}
+.about-text{padding:1rem 0}
+.about-text h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-style:italic;color:var(--gold);margin-bottom:1.2rem}
+.about-text p{color:var(--paper-dark);font-size:1.05rem;margin-bottom:1rem;line-height:1.85}
+.about-stats{display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap}
+.stat{text-align:center;padding:1rem 1.5rem;border:1px solid rgba(196,154,58,0.3);background:rgba(196,154,58,0.05)}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);display:block}
+.stat-label{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-top:0.2rem}
+
+/* ROUTE */
+#route{padding:6rem 0;background:var(--graphite-mid)}
+.route-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.route-card{background:var(--graphite-light);border:1px solid rgba(247,237,216,0.08);overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer}
+.route-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.5)}
+.route-card img{width:100%;height:220px;object-fit:cover;filter:sepia(0.25) contrast(1.1);transition:filter 0.3s}
+.route-card:hover img{filter:sepia(0) contrast(1.1)}
+.route-card-body{padding:1.2rem}
+.route-card-num{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red-light);margin-bottom:0.4rem}
+.route-card-title{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.4rem;color:var(--paper)}
+.route-card-period{font-size:0.85rem;color:var(--text-muted);font-style:italic}
+
+/* TIMELINE */
+#timeline{padding:6rem 0;background:var(--graphite)}
+.timeline-wrapper{position:relative;max-width:900px;margin:0 auto}
+.timeline-wrapper::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--red) 5%,var(--red) 95%,transparent);transform:translateX(-50%)}
+.timeline-entry{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;margin-bottom:3rem;position:relative;align-items:start}
+.timeline-entry.left .entry-content{grid-column:1;text-align:right;padding-right:2.5rem}
+.timeline-entry.left .entry-image{grid-column:3;padding-left:2.5rem}
+.timeline-entry.right .entry-content{grid-column:3;text-align:left;padding-left:2.5rem}
+.timeline-entry.right .entry-image{grid-column:1;grid-row:1;padding-right:2.5rem}
+.timeline-dot{grid-column:2;display:flex;align-items:flex-start;justify-content:center;padding-top:0.5rem}
+.timeline-dot::after{content:'';width:12px;height:12px;background:var(--red);border:2px solid var(--graphite);box-shadow:0 0 0 2px var(--red);border-radius:50%;flex-shrink:0}
+.entry-content{min-width:0}
+.entry-date{font-family:'Oswald',sans-serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem}
+.entry-place{font-size:0.85rem;color:var(--red-light);font-style:italic;margin-bottom:0.7rem}
+.entry-text{font-size:0.98rem;color:var(--paper-dark);line-height:1.85;background:rgba(247,237,216,0.04);padding:1.2rem;border:1px solid rgba(247,237,216,0.07);position:relative}
+.entry-text::before{content:'\201C';font-family:'Playfair Display',serif;font-size:3rem;color:var(--red);position:absolute;top:-0.8rem;left:0.3rem;line-height:1;opacity:0.5}
+.entry-image img{width:100%;max-width:320px;cursor:pointer;border:2px solid rgba(247,237,216,0.15);filter:sepia(0.2);transition:all 0.3s;display:block}
+.timeline-entry.left .entry-image img{margin-left:auto}
+.entry-image img:hover{filter:sepia(0);border-color:var(--gold);transform:scale(1.02)}
+.entry-image figcaption{font-size:0.72rem;color:var(--text-muted);margin-top:0.4rem;font-style:italic;text-align:center}
+
+/* MONTH HEADER */
+.month-header{text-align:center;position:relative;margin:4rem 0 2.5rem;z-index:2}
+.month-header-inner{display:inline-block;background:var(--graphite);padding:0.5rem 2rem;border:1px solid rgba(196,154,58,0.4);position:relative}
+.month-header h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;color:var(--gold)}
+
+/* GALLERY */
+#gallery{padding:6rem 0;background:var(--graphite-mid)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px}
+.gallery-item{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer;background:var(--graphite-light)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;filter:sepia(0.2) brightness(0.9);transition:all 0.4s;display:block}
+.gallery-item:hover img{filter:sepia(0) brightness(1.1);transform:scale(1.05)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:rgba(122,26,26,0);transition:background 0.3s}
+.gallery-item:hover::after{background:rgba(122,26,26,0.15)}
+
+/* MEMORIAL */
+#memorial{padding:8rem 0;background:var(--graphite);position:relative;overflow:hidden}
+#memorial::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(122,26,26,0.08) 0%,transparent 70%)}
+.memorial-inner{max-width:700px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.memorial-icon{font-size:3rem;margin-bottom:2rem;opacity:0.4}
+.memorial-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:1.5rem;color:var(--paper)}
+.memorial-text{font-size:1.1rem;color:var(--paper-dark);line-height:2;margin-bottom:2.5rem}
+.memorial-quote{border-left:3px solid var(--red);padding:1.5rem 2rem;margin:3rem 0;text-align:left;background:rgba(247,237,216,0.03)}
+.memorial-quote blockquote{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;color:var(--paper);line-height:1.8}
+.memorial-quote cite{display:block;margin-top:0.8rem;font-size:0.8rem;color:var(--text-muted);font-style:normal;font-family:'Oswald',sans-serif;letter-spacing:0.1em;text-transform:uppercase}
+.btn-download{display:inline-block;padding:1rem 2.8rem;background:var(--red);color:var(--paper);font-family:'Oswald',sans-serif;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;margin-top:2rem}
+.btn-download:hover{background:var(--red-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(122,26,26,0.4)}
+
+/* FOOTER */
+footer{background:rgba(0,0,0,0.4);border-top:1px solid rgba(196,154,58,0.15);padding:2rem;text-align:center}
+footer p{font-size:0.78rem;color:var(--text-muted);font-family:'Oswald',sans-serif;letter-spacing:0.1em}
+
+/* LIGHTBOX */
+#lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;padding:2rem}
+#lightbox.open{display:flex}
+#lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border:2px solid rgba(247,237,216,0.15);box-shadow:0 0 60px rgba(0,0,0,0.8)}
+#lb-close{position:fixed;top:1.2rem;right:1.5rem;font-size:2rem;color:var(--paper);cursor:pointer;line-height:1;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(247,237,216,0.2);transition:all 0.2s;z-index:10000}
+#lb-close:hover{background:var(--red);border-color:var(--red)}
+#lb-caption{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);color:var(--paper-dark);font-size:0.85rem;font-style:italic;text-align:center;max-width:600px}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:var(--graphite);flex-direction:column;gap:0;padding:1rem 0;border-bottom:1px solid rgba(196,154,58,0.2)}
+  .nav-links.open{display:flex}
+  .nav-links li{padding:0}
+  .nav-links a{display:block;padding:0.9rem 2rem;border-bottom:none;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .nav-burger{display:flex}
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .about-photo img{max-width:100%}
+  .timeline-wrapper::before{left:20px}
+  .timeline-entry{grid-template-columns:40px 1fr;grid-template-rows:auto auto}
+  .timeline-entry.left .entry-content,.timeline-entry.right .entry-content{grid-column:2;text-align:left;padding-right:0;padding-left:1rem}
+  .timeline-entry.left .entry-image,.timeline-entry.right .entry-image{grid-column:2;grid-row:2;padding:0 0 0 1rem}
+  .timeline-dot{grid-column:1;grid-row:1}
+  .timeline-entry.left .entry-image img{margin-left:0}
+  .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+}
+@media(max-width:560px){
+  .about-stats{gap:1rem}
+  .stat{padding:0.7rem 1rem}
+  .entry-text{padding:0.8rem}
+  .memorial-quote{padding:1rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">1943–1945</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">О дневнике</a></li>
+      <li><a href="#route">Маршрут</a></li>
+      <li><a href="#timeline">Записи</a></li>
+      <li><a href="#gallery">Галерея</a></li>
+      <li><a href="#memorial">Память</a></li>
+    </ul>
+    <div class="nav-burger" id="navBurger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-date">Фронтовой дневник · 1943 — 1945</div>
+    <h1 class="hero-title">Дневник<br>фронтовика</h1>
+    <p class="hero-subtitle">Шелковников Сергей Сергеевич</p>
+    <p class="hero-desc">Личные записи офицера Красной Армии — дороги, бои, госпиталь, потери и надежда. Голос человека на войне.</p>
+    <a href="#timeline" class="btn-primary"><span>Читать дневник</span></a>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Предисловие</div>
+      <h2 class="section-title">О дневнике</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="./images/1.webp" alt="Шелковников Сергей Сергеевич" onclick="openLightbox(this.src, this.alt)" loading="lazy">
+        <div class="about-photo-caption">Шелковников С.С.</div>
+      </div>
+      <div class="about-text">
+        <h3>Фронтовые записи 1943–1945 годов</h3>
+        <p>Этот дневник вёл офицер Красной Армии Шелковников Сергей Сергеевич — с последних дней декабря 1943 по март 1945 года. Записи охватывают путь от Торопца через Белоруссию, Литву, Пруссию до Вильнюса.</p>
+        <p>На страницах — не парадная история войны, а живой голос человека: размышления о судьбе, письма к «чижику», горе от гибели друзей, боль ранения, радость весны среди пепелища. Автор дневника пишет о Блоке и Пушкине в траншее, придумывает романы в госпитале, спорит о поэзии под артиллерийским огнём.</p>
+        <p>Дневник прошёл вместе с ним все фронтовые дороги и сохранил то, что никакой официальный документ не мог сохранить — человека на войне.</p>
+        <div class="about-stats">
+          <div class="stat"><span class="stat-num">1943</span><span class="stat-label">Начало записей</span></div>
+          <div class="stat"><span class="stat-num">1945</span><span class="stat-label">Последняя запись</span></div>
+          <div class="stat"><span class="stat-num">34</span><span class="stat-label">Страницы дневника</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE -->
+<section id="route">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Путь солдата</div>
+      <h2 class="section-title">Маршрут</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="route-grid">
+      <div class="route-card" onclick="openLightbox('./images/Karta1.jpeg','Карта 1 — Торопец, Калининская область, начало пути')">
+        <img src="./images/Karta1.jpeg" alt="Карта 1 — Торопец" loading="lazy">
+        <div class="route-card-body">
+          <div class="route-card-num">Карта I</div>
+          <div class="route-card-title">Торопец — Торопа</div>
+          <div class="route-card-period">Декабрь 1943 — Январь 1944</div>
+        </div>
+      </div>
+      <div class="route-card" onclick="openLightbox('./images/Karta2.jpeg','Карта 2 — Белоруссия, бои под Витебском, весна 1944')">
+        <img src="./images/Karta2.jpeg" alt="Карта 2 — Белоруссия" loading="lazy">
+        <div class="route-card-body">
+          <div class="route-card-num">Карта II</div>
+          <div class="route-card-title">Белоруссия — Витебск</div>
+          <div class="route-card-period">Январь — Июль 1944</div>
+        </div>
+      </div>
+      <div class="route-card" onclick="openLightbox('./images/Karta3.jpeg','Карта 3 — Литва, Вильнюс, Пруссия 1944–1945')">
+        <img src="./images/Karta3.jpeg" alt="Карта 3 — Литва и Пруссия" loading="lazy">
+        <div class="route-card-body">
+          <div class="route-card-num">Карта III</div>
+          <div class="route-card-title">Литва — Пруссия</div>
+          <div class="route-card-period">Август 1944 — Февраль 1945</div>
+        </div>
+      </div>
+      <div class="route-card" onclick="openLightbox('./images/Karta4.jpeg','Карта 4 — Вильнюс, финальный этап, весна 1945')">
+        <img src="./images/Karta4.jpeg" alt="Карта 4 — Вильнюс" loading="lazy">
+        <div class="route-card-body">
+          <div class="route-card-num">Карта IV</div>
+          <div class="route-card-title">Вильнюс — конец войны</div>
+          <div class="route-card-period">Февраль — Март 1945</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Личные записи</div>
+      <h2 class="section-title">Записи дневника</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="timeline-wrapper">
+
+      <!-- ДЕКАБРЬ 1943 -->
+      <div class="month-header"><div class="month-header-inner"><h3>Декабрь 1943</h3></div></div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">31 декабря 1943 г. Пт.</div>
+          <div class="entry-place">Ст. Торопец</div>
+          <div class="entry-text">Стрелки часов нехотя, вздрагивая от напряжения, медленно описывают свой последний круг, завершающий круг уходящего в вечность старого года, чтобы на мгновение застыть и сделать решительный скачок в новое, непредвиденное, не предсказанное, — сказать: Новый год идёт. Но простите, старый тоже не опустит главы — он славно повоевал. Уйдя в вечность, 1943 будет перекликаться с 1812, ибо он не хуже старика повоевал. А ну-ка, мол, ты 1944 — каким ты придёшь после сдачи к нашей братии? Да, каким ты будешь 1944? Хочется спросить. Суха, не торжественна получилась эта встреча. Всё дороги, дороги. Бросаю, иду спать...</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/6.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'31 декабря 1943 — страница дневника')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <!-- ЯНВАРЬ 1944 -->
+      <div class="month-header"><div class="month-header-inner"><h3>Январь 1944</h3></div></div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/7.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'1 января 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">1 января 1944 г. Сб.</div>
+          <div class="entry-place">Ст. Торопа</div>
+          <div class="entry-text">С утра большими хлопьями падал мягкий снег. Таким мягким, тёплым днём начался Новый год. Тётя Домна — очень хорошая добродушная женщина, приготовила завтрак. В ожидании завтрака у нас с Николаем Родионовичем завязался спор из-за одного слова — «Зимно». Вначале вспоминали стихи Блока, Маяковского, Безыменского, говорили о Багрицком. В частности, я привёл четверостишие Багрицкого: «По берегам Зеленокудрым Крыма, мы красные знамёна пронесли». Вот это слово «Зеленокудрым» очень понравилось ему. В 2 часа выехали из Торопца и в 3 приехали в ст. Торопа. А завтра снова в путь-дорогу. Написал своему «чижику» уже три письма. Никак она не выходит у меня из головы, да едва ли и выйдет. Чижик, чижик...</div>
+        </div>
+      </div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">2 января 1944 г. Вс.</div>
+          <div class="entry-text">Всю ночь бесновалась вьюга и оторванный ставень громыхал по стене. Утром вышел на улицу, ветер начал бросать огромными охапками снег мне в лицо. Снег вихрем с земли взмывал вверх, потом стремглав бросался в сторону. И в такую погоду нужно было ехать. На станции такое положение, что ни у кого толком не узнали, когда пойдёт поезд. Просидели часов до трёх и не уехали. Пытались ехать на машине — тоже не вышло. Пошли ночевать на старую квартиру. Что-то будет завтра?</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/8.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'2 января 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/9.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'3 января 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">3 января 1944 г. Пн.</div>
+          <div class="entry-place">Смоленщина</div>
+          <div class="entry-text">Нет, нельзя предугадать калининскую погоду. Сегодня утром было тихо, чуть-чуть подувал лёгонький ветерок. Старик вышел на улицу: «Снег будет». И он был прав. Мы решили идти пешком. Прошли километров пять, как небо заволокли снежные тучи, рванул ветер и обрушил на нас снопы снега. Идти трудно, но мы бодримся. Ни одна машина не остановилась, хотя все шли порожняком. Пешком прошли 18 км и всё же нашёлся человек, который взял нас на машину. Вот истинное блаженство! Вот она снова Смоленщина. Дороги твои, Смоленщина, мне памятны после 42 года осени — я проклял тогда их. И вот они снова...</div>
+        </div>
+      </div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">4 января. Вт.</div>
+          <div class="entry-place">Деревня Скороходово</div>
+          <div class="entry-text">Погода установилась тёплая, тихая. Встанешь, оглянешься кругом — тянется длинная, еле заметная на снежной целине дорожка, ведущая к полузанесённой снегом деревеньке, там и сям торчат голые берёзки. Всмотришься — и не хочется отрывать взгляда — так всё живописно и прекрасно, точно снято с какого-нибудь этюда Левитана или Перова. Наши ребята сообщили мне радостную весть — в той же деревне, куда я иду, находится мой братишка Герман. Но так мне и не удалось его увидеть. Пять лет я его не видел, переписка оборвалась ещё в июне, и вдруг нежданно-негаданно — он здесь. Прекрасно!</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/10.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'4 января 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/11.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'5–14 января 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">5 января. Ср.</div>
+          <div class="entry-text">Наконец-то встретил Герку. Он всё такой же, только чуть-чуть солидности набрался. Поговорили о том о сём, как будто мы с ним вечно жили и не разлучались. Устроился на место.</div>
+          <br>
+          <div class="entry-date">6 января. Чт.</div>
+          <div class="entry-text">«Ветер, ветер на всём божьем свете» (А. Блок). Режущий, обжигающий ветер. Он неистово мечется и стонет. Кругом снег, не видно ни зги.</div>
+          <br>
+          <div class="entry-date">10 января. Пн.</div>
+          <div class="entry-text">Ветер беснуется третьи сутки. Не видно ни зги. К вечеру пурга стихает, а утром разгорается с новой силой. Скука!</div>
+        </div>
+      </div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">14 января. Пн.</div>
+          <div class="entry-place">Деревня Васьково</div>
+          <div class="entry-text">Книги наводят мысли на размышления. Думаешь о том, кто ты есть сейчас и был в прошлом. Всё чаще вспоминаешь дом, детство, разные места и юность... И кажется — не так жил, как нужно было, учился, но не понимал по-настоящему всего этого сложного механизма — жизни. И по-настоящему — когда пошёл ходить по «людям», когда познал жизнь деревень и городов, стал ценить человеческое достоинство и понял, что «Я» есть нечто весомое в этом мире... Десятые сутки живу в этом Васьково. Кругом просторы смоленские. Лежишь и живёшь ожиданиями — когда отправят. Дни тянутся утомительно долго, нудно... Пурга и пурга... Снега и снега — белоснежная скатерть... метели... и скучные мысли.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/12.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'14 января 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/13.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'18–19 января 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">18 января. Утро. Вт.</div>
+          <div class="entry-place">Деревня Обидино</div>
+          <div class="entry-text">Живёшь часами. Ждёшь приказа — и судьба твоя покатилась. Восемнадцать часов, туго набитые в крытые машины, мы тряслись от холода и плохой дороги. Ночью приехали в д. Обидино. Здесь всего только четыре недели назад прогнали немца. Сказывается «работа» фрицев и полицейских над этими деревнями. Все лучшее разбито и сожжено. Болото. Пишу эти строки, а голова шумит от недосыпания. Трое суток не спал. Спать, спать... Сейчас напишу и усну сном младенца.</div>
+          <br>
+          <div class="entry-date">19 января. Ср.</div>
+          <div class="entry-place">Город Городок</div>
+          <div class="entry-text">Проезжаю по следам недавних ожесточённых боёв. Кругом одни развалины. Уныло торчат печные трубы — эти постоянные свидетели пожарищ и разбоя. Сейчас только по печным трубам можно судить о бывшем городе. А жизнь упорно цепляется за каждый камень, за каждое обуглившееся бревно. Жизнь в освобождённом районе бьёт ключом. Только бы зацепиться, а потом пойдёт. Таково суровое дуновение ветра войны, жестокая её поступь.</div>
+        </div>
+      </div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">25 января. Вт.</div>
+          <div class="entry-place">Белоруссия</div>
+          <div class="entry-text">Начался так: на землю, прикрытую чуть-чуть мокрым снегом, опустился дряхлый туман, с крыш бежала нехотя, капля за каплей, вода. На улице сыро, лужи. Совсем не похоже на январь. Какая красота наша сибирская зима — лёгкий морозец румянит щёки, под ногами похрустывает снежок, легко и весело. А такая погода клонит к хандре. Наконец-то добрался до места и с головой опустился в «кипучий» котёл учебной работы. Сейчас пока учимся, но очень скоро — скоро... бой! Люди замечательные, бывалые, опалённые ветром войны. С такими воевать и бить немчуру.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/14.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'25–31 января 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/15.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'31 января 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">31 января. Пн.</div>
+          <div class="entry-place">Землянка</div>
+          <div class="entry-text">Вечер. Землянка, полуосвещённая светом коптилки. Это последние «мирные» часы, но они спускаются час за часом, как камни с горы, нигде не задерживаясь. Всё ближе и ближе. Вот сейчас память работает особенно напряжённо — хочется припомнить что-то хорошее. И когда я вспоминаю это хорошее, мне ещё быстрее хочется идти туда. Биться за милого «чижика», за детей наших, детство которых исковеркали фрицы и гансы. Война и война... Она оставляет неизгладимый отпечаток на всём.</div>
+        </div>
+      </div>
+
+      <!-- ФЕВРАЛЬ 1944 -->
+      <div class="month-header"><div class="month-header-inner"><h3>Февраль 1944</h3></div></div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">4 февраля. Пт.</div>
+          <div class="entry-place">Фронт под Витебском</div>
+          <div class="entry-text">Отошли в область предания все эти тыловые бредни. Вот уже четвёртый день кругом всё грохочет, приходится прятаться в щели. «Содом и Гоморра». Оборону прорвали успешно, продвинулись километров на десять и упёрся фриц. Погода стоит скверная — позавчера целый день шёл дождь, и это февраль! Куда ни ступи — вода. А Витебск будет наш!</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/16.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'4 февраля 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/17.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'9 февраля 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">9 февраля. Ср.</div>
+          <div class="entry-text">Не много нужно для солдатского счастья — чтобы отдохнуть, ему стоит чуть-чуть где-нибудь примоститься и на час-два прикрыть глаза, и он снова будет бодрым, весёлым и готовым переносить любые лишения; стоит отойти от соприкосновения с противником, от ощущения разрывов снарядов — километра три-четыре в тыл и для солдата это полное блаженство, «рай земной». Он сразу же начинает по-хозяйски обустраиваться, стричься, бриться, чинить обмундирование. На всех лицах улыбка. Вот сейчас я сижу около костра, пишу эти строки. А рядом кто-то чистит матчасть, кто-то пишет письмо на родину и любимой. Славные хлопцы.</div>
+        </div>
+      </div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">15 февраля.</div>
+          <div class="entry-text">С утра подул северный ветер с лёгким морозцем. Мороз крепко пощипывает уши и щёки. Под ногами похрустывающий снежок. Хорошо и легко после такой слякоти.<br><br>Всё чаще и чаще вспоминаю своего чижика. Что-то прочно и глубоко она засела в сердце. Говорят, что любовь обессмертивает человека, она движет его на новые подвиги. Да, это верно. Но сейчас что-то неведомое подсасывает сердце. Писем не получаю, а пора бы. Просто приходится завидовать другим, как они ежедневно получают по два-три письма. Посмотрим, что будет дальше.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/18.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'15 февраля 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/19.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'20–27 февраля 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">20 февраля.</div>
+          <div class="entry-text">Трое суток подряд — дороги и дороги. Совершили стокилометровый марш. Спали прямо на ходу, в движении. Но марш ещё не окончен. Сколько идти и куда — не известно, но очевидно это какой-то глубоко продуманный манёвр высшим командованием. Где-то опять будем гробить фрицев. Сейчас пока отдыхаем. Сегодня ночью опять в марш.</div>
+          <br>
+          <div class="entry-date">25 февраля.</div>
+          <div class="entry-text">Особенно памятным был день 23 февраля. Во-первых, праздник — 26-я годовщина Красной Армии, а во-вторых, получил от «чижика» письмо. Это второе как-то сбросило хандру, приподняло настроение, окрылило какими-то надеждами. Вечером был офицерский вечер. Первый вечер, на котором мне пришлось присутствовать, где я как офицер Красной Армии, впервые в этой дружной монолитной семье провозглашал тосты. Поднимали тосты за нашу победу, за славу Красной Армии, а я про себя произнёс тост за своего любимого «чижика», т.к. этот день — день её рождения.</div>
+        </div>
+      </div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">29 февраля.</div>
+          <div class="entry-place">Траншея</div>
+          <div class="entry-text">Идёт снег, немного оттеплело. Сижу в траншее и решил записать, хотя руки не гнутся. Сегодня похоронили Ярёменко — лучшего товарища, который погиб при артналёте. Ребята поклялись мстить беспощадно за убитого товарища. Скоро начнём действовать.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/20.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'29 февраля 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <!-- МАРТ 1944 -->
+      <div class="month-header"><div class="month-header-inner"><h3>Март 1944 — Ранение</h3></div></div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/21.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'3 марта 1944 — ранение')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">3 марта.</div>
+          <div class="entry-place">Ранение. Госпиталь</div>
+          <div class="entry-text">На третьем году войны я увидел смерть. Я слышал только далёкий свист снаряда — потом тьма. Я лежу в сплошном дыму, присыпанный землёй — недвижим. Лежу и ничего не могу понять — что такое, неужели смерть? Острый, режущий страх смерти полоснул сердце. Так вот она какая смерть. «Врёшь, рановато». Я вскочил на ноги, и ничего не чувствуя, не помня себя, побежал. Добежал до Ковалёва, лёг в окопчик. Там я увидел, что палатки на мне нет (она изорвана в клочья), полевой сумки нет, весь я в грязи, закопчённый дымом. Испугался ли я смерти? — Нет, не испугался, но я испугался того, что придётся умереть, не исполнив всего что хотел. Ординарец довёл меня до санчасти, и я поехал в госпиталь. Трудно поверить, что после прямого попадания в окоп можно уцелеть. Но это факт. Разбило второй миномёт, а человек жив. Да, всяко бывает. Но будем жить, будем бить гадов. Не родился тот фриц, который мог бы меня убить. Я в госпитале.</div>
+        </div>
+      </div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">7 марта.</div>
+          <div class="entry-place">Госпиталь</div>
+          <div class="entry-text">Обыкновенны госпитальные будни. Время тянется утомительно долго и нечем его занять. Только шахматы спасают — одно развлечение. Книг бы, книг! — Вот погрузиться с головой и читать, читать без конца, набираться мудрости... Но увы! Их нет. Сейчас в голове всё вертится сюжет одной повести о человеке, который сочинял большую сказку о великой победе.</div>
+          <br>
+          <div class="entry-date">8 марта.</div>
+          <div class="entry-text">Дружба, окроплённая кровью, самая крепкая, неразрывная дружба. Сегодня выписались друзья, с которыми вместе воевали и вместе были ранены. Один батальон, один полк. И вот они уехали, а я остался пока. Рану сегодня сшили, так что скоро заживёт и тогда снова в путь-дорогу.<br><br>Война идёт третий год. Отчётливо в памяти встаёт июнь 1941 г. Жара. Цветущий и зелёный Киев. Днепр несёт свои тихие нагретые воды. Дороги забиты машинами, возками с домашним скарбом. Идут женщины с узлами, идут дети... Все идут туда, на восток. А солнце палит неумолимо. Мы идём по городу. Рубашки, пропитанные потом, прилипают к телу, пот, солёный пот заливает глаза. Там, где-то ухают орудия, мы идём туда. Так оно началось. Так было много раз за эти годы. Киев, Сталинград, Керчь, Великие Луки...</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/22.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'7–8 марта 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/23.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'12–16 марта 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">12 марта.</div>
+          <div class="entry-text">Льются тихие, напевные аккорды баяна, наполняя всё существо моё каким-то лирическим, ненужным чувством. Несутся звуки, а я лежу и вспоминаю всё — друзей, близких по крови, по оружию. Вспоминаются жаркие сталинградские степи, калининские болота, Вася Найдёнов — мой лучший и близкий друг, погибший в боях за Смоленск. Сколько мы прожили с ним славных, весёлых минут. Пятигорск, Ессентуки, Кисловодск...</div>
+          <br>
+          <div class="entry-date">16 марта.</div>
+          <div class="entry-text">Весна! С каждым днём всё теплее становится её дыхание. Ветры обсосали снега. Сопки поблёскивают своими вспотевшими плешинами. Пригретые солнцем, они парят невидимыми потоками. Вот она уже третья военная весна. Всегда она приносит людям тёплое, веселящее душу дыхание; она пробуждает всё от зимней спячки — весело журчащие ручейки, приподнимают головки поникшие берёзки, весело щебечут пережившие зиму птахи. Им весело. Но ещё только март.</div>
+        </div>
+      </div>
+
+      <!-- АПРЕЛЬ 1944 -->
+      <div class="month-header"><div class="month-header-inner"><h3>Апрель — Май 1944</h3></div></div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">4 апреля.</div>
+          <div class="entry-text">Ночью держит морозец, а днём — тает. Но весна здесь что-то запаздывает. Хотелось много написать, но какая-то апатия ко всему. А каждый день сейчас так богат событиями, что ежедневно ждёшь вечера, чтобы заслушать сводку информбюро. Наши войска в Румынии. Каждый человек аплодирует тем войскам всем сердцем, всем существом своим. Пока лежу ещё в госпитале.</div>
+          <br>
+          <div class="entry-date">14 апреля.</div>
+          <div class="entry-text">Произошла самая желанная встреча, дорогая для меня — встретил и совершенно случайно Васю Ампельцева — своего старого сослуживца. Крепко обнялись с ним, как с братом. От него узнал, что третьего друга, моего воспитанника Дёмки Франчука не стало. Приказал долго жить. Итак Василий Басенко, Василий Найдёнов, Дёмка Франчук... погибли. И осталось... мало, осталось — трое.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/24.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'Апрель 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/25.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'3 мая 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">3 мая 1944 г.</div>
+          <div class="entry-text">Дряхлый майский день. Накрапывает мелкий, по-осеннему, дождик. Сегодня распрощался со своими госпитальными товарищами. Особенно за последнее время подружились с Иваном Мухиным. Нас связало не военное общее, а прошлое гражданское — он студент Ивановского педагогического института. Бывало, лежишь с ним в постели и вспоминаешь Пушкина, Маяковского, Блока, Жарова и др. Он всегда восторгался моей памяти. Ведь уже шесть лет не держал Блока в руках, а его «Незнакомка» и сейчас ярко стоит в моей памяти. Крепкие дружеские рукопожатия и прощай госпиталь.</div>
+        </div>
+      </div>
+
+      <!-- ЛЕТО 1944 -->
+      <div class="month-header"><div class="month-header-inner"><h3>Лето 1944 — Наступление</h3></div></div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">29 мая.</div>
+          <div class="entry-text">Пути-дороги... Третьи сутки идём, тупо втыкая ноги в дорожную пыль. А кругом всё цветёт и радуется. Посмотришь направо — молоденький лесок, мелко семеня, спускается с пригорка в ложбину, поблескивающую молоденькой изумрудной травой. Вот неглубокий овражек игриво вьётся между сопочек. А там вдали синенькой капелькой лежит озерко, стянутое молоденьким березнячком. Небо — высокое, иссине голубое, в бриллиантовых капельках звёзд, висит над нами.</div>
+          <br>
+          <div class="entry-date">12 июля.</div>
+          <div class="entry-text">И этот марш был, как бы скручиваемая невидимой рукой пружина, которая в итоге должна была развернуться в грозную силу. Готовились скрытно. Терпеливо. И вот 23 июня началось... Жаркие были денёчки — прорыв обороны, а потом преследование отступающего противника. Что не день — то марш 30–40 км. Орша, Толочино, Борисов, Молодечно. Пять суток мчался по минской магистрали на «студебеккере», делая в день по 70–100 км. Вспоминаю весь этот путь, который равняется примерно 600 км. Наша Белоруссия, Западная Литва. Народ везде хорошо встречает нас.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/26.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'Май — Июль 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/27.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'Август 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">1 августа.</div>
+          <div class="entry-text">Прошли Неман. Теперь он остался далеко за нашей спиной. А фрицы на что-то надеялись задержать нас на этом рубеже. Не вышло! Скоро-скоро покажутся контуры границы. Да, наша земля будет полностью освобождена, а фрицы, капутно настроенные, ползут в свою берлогу.</div>
+          <br>
+          <div class="entry-date">24 августа.</div>
+          <div class="entry-text">Кончается август, кончается лето. Смотришь — голые поля сжатых хлебов... И небо, размалёванное осенними бликами, и какая-то грусть объемлет сердце. Сегодня союзники взяли Париж. Теперь у них пойдёт. Но и у нас идёт блестяще. Пошли Украинские. Счастливо ребята! Скоро мы идём, нам один шаг и... Пруссия. Вот они мечты трёх лет — бить пруссов в их логове. Мечты и действительность. Время работает на нас...</div>
+        </div>
+      </div>
+
+      <!-- ОСЕНЬ 1944 -->
+      <div class="month-header"><div class="month-header-inner"><h3>Осень 1944 — Литва</h3></div></div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">26 сентября.</div>
+          <div class="entry-text">Осень. Дуют холодные ветры, гонят по голой земле высохшие пожелтелые листья. Небо — точно солдатское одеяло — свинцово-тяжёлое, низкое. Приходится в эти дни много работать: учимся. Хотелось бы, чтобы сутки были не 24 часа, а значительно больше. Никогда время не было так дорого и никогда я в нём так не нуждался, как в эти дни.</div>
+          <br>
+          <div class="entry-date">8 октября.</div>
+          <div class="entry-text">Хочется бесконечно писать про осень. Писать, когда опадает жёлтый лист с деревьев, когда воздух прозрачный и звонкий, он звенит всеми отголосками природы, когда становится голосом земли... Лечь на сжатую траву и смотреть долго-долго в бесконечную голубизну неба, смотреть и ни о чём не думать... Лирика... Скоро идём туда.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/28.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'Осень 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <!-- Рассказ старика -->
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/29.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'Рассказ старика-литовца')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">Июль. Литва.</div>
+          <div class="entry-place">Из воспоминаний</div>
+          <div class="entry-text">Пригнали в Алитус русских военнопленных, тысяч пять примерно. Народу-то много, а кормить-то каждая живая тварь просит. Держали их с месяц, народ сотнями мрёт, вот и раздали нам как бы на откормку на два месяца. Ну, и я взял одного, но такой худой был, что еле-еле ходил. Взял я его и начал кормить, и знаешь, за неделю такой парень сделался — хоть куда. Ну, привязался он ко мне, как к родному, стал работать. И эти два месяца пролетели, как облачко. Пришёл полицейский и говорит, что «пленника» пора отводить в лагерь... «Уйду, — говорит, — я от тебя, чтобы не подводить». «Нет, — говорю ему, — никуда ты не пойдёшь, а останешься у меня. Я теперь за тебя буду отвечать...» Пришли снова с двумя немцами. Я пожимаю только плечами, дескать, ушёл к вам обратно, а я откуда могу знать где он. Посадили меня в тюрьму. Отсидел я шесть месяцев, и когда пришёл домой, то парня-то моего уже не было. Говорят, ушёл в партизаны...</div>
+        </div>
+      </div>
+
+      <!-- ДЕКАБРЬ 1944 -->
+      <div class="month-header"><div class="month-header-inner"><h3>Декабрь 1944 — Вильно</h3></div></div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">18 декабря 1944 г.</div>
+          <div class="entry-place">Вильно, госпиталь</div>
+          <div class="entry-text">Скоро кончается год, год, за который так много пришлось увидеть и пережить, особенно за последние месяцы — июль-октябрь. Здесь вступление в Литву, в Пруссию... А я так мало и скучно заносил этот богатейший материал наблюдений в эту книжечку. Дня три назад выпал первый снег и пока ещё держится. Хотелось бы, чтобы мороз захватывал дыхание, чтобы сверкающий на солнце рассыпчатый снег похрустывал под ногами. Вот уже скоро будет два месяца, как я валяюсь на госпитальных койках в Вильно.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/30.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'18 декабря 1944')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <!-- ФЕВРАЛЬ 1945 -->
+      <div class="month-header"><div class="month-header-inner"><h3>1945 год — Пруссия и победа</h3></div></div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/31.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'3 февраля 1945')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">3 февраля 1945 г.</div>
+          <div class="entry-place">Вильно</div>
+          <div class="entry-text">Таким образом, на четвёртом году войны, дослужившись до звания капитана, я стал «интендантом». Можно много написать — как я стал интендантом? И смешно, и обидно. Обидно, что будут тыкать в глаза, указывать на мою принадлежность к «тыловикам». Но это ещё на воде вилами писано. Не вытерпеть мне, зачахну: нужно удирать отсюда. Скоро предстоит поездка в Пруссию, а там узнаю поворот в своей судьбе... Слякоть. Капель с крыш. Дряхлый снег. Дурное настроение.</div>
+        </div>
+      </div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">14 февраля 1945 г.</div>
+          <div class="entry-place">Пруссия</div>
+          <div class="entry-text">Вот она снова Прусская земля. На сей раз мой путь по развалинам бывших городов. Эйдткунен — граница — Литва — Пруссия. На границе протекает маленькая, заросшая речушка Шешупа, а там начинается Пруссия — островерхие крыши домов красночерепичные, серые стены, небольшие окна и узенькие двери.<br><br>Я стоял на нашей стороне, а напротив меня в пятидесяти метрах большими чёрными буквами на белой доске было написано слово из восьми букв, вызывающее ненависть, стремление быстрее перешагнуть эту черту и идти бесконечно вперёд, пока перед нами не встанут другие слова. Наша цель, наши чаяния и это слово будет — Берлин. Я стоял и думал и весь этот путь образно выстраивался в моих глазах. Большой и великий путь. Проехал Шталлупенен, Гумбиннен, Инстербург — и во всех них рука войны хозяйственно прошлась по кварталам этих городов. Развалины. И когда видишь возмездие — должное возмездие, за сожжённые и разрушенные города России — всё же не чувствуешь удовлетворения. Поделом, но...<br><br>Тысячи наших людей и союзных государств идут на восток, к нам из кабалы немецких бюргеров — русские, поляки, литовцы, французы — в своё светлое будущее, и они верят, что оно недалеко.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/32.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'14 февраля 1945 — Пруссия')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-entry right">
+        <figure class="entry-image">
+          <img src="./images/33.jpg" alt="Страница дневника" onclick="openLightbox(this.src,'23 февраля 1945 — Вильнюс')" loading="lazy">
+          <figcaption>Страница дневника</figcaption>
+        </figure>
+        <div class="timeline-dot"></div>
+        <div class="entry-content">
+          <div class="entry-date">23 февраля 1945 г.</div>
+          <div class="entry-place">Вильнюс</div>
+          <div class="entry-text">Впервые годовщину (27-й день Красной Армии) встретил в такой обстановке. Притихший весенний город. На улице тепло и мне кажется, что пахнет весной. Я только что вернулся из города и от нечего делать решил записать кое-что. Наконец-то колесо фортуны, поворота которого я так с нетерпением ждал, повернулось. Я сделал шаг в новое, пока совершенно неизвестное для меня поприще. И это, кажется, моя постоянная, но жизненная работа. Работа желанная для меня, а значит — дело будет.</div>
+          <br>
+          <div class="entry-date">25 февраля 1945 г.</div>
+          <div class="entry-text">Сегодня снова распрощался с другом — в начале временным попутчиком в моих скитаниях, впоследствии перешедшим в дружбу. Сколько их, друзей, и где они теперь? Нас спаивало всегда в жёсткий товарищеский контакт единое стремление к знаниям, даже жажды знаний.</div>
+        </div>
+      </div>
+
+      <div class="timeline-entry left">
+        <div class="entry-content">
+          <div class="entry-date">11 марта 1945 г.</div>
+          <div class="entry-place">Последняя запись</div>
+          <div class="entry-text">Замолчал единственный наставник на моём житейском пути. Где он, что стало с ним?<br><br><em style="color:var(--gold);font-family:'Playfair Display',serif">Я часто вижу голубые дали,<br>Подёрнутые дымкой облаков.<br>Твои глаза как звёздочки мерцали,<br>Как цвет благоухающих цветков.</em></div>
+        </div>
+        <div class="timeline-dot"></div>
+        <figure class="entry-image">
+          <img src="./images/34.jpg" alt="Последняя страница дневника" onclick="openLightbox(this.src,'11 марта 1945 — последняя запись')" loading="lazy">
+          <figcaption>Последняя страница</figcaption>
+        </figure>
+      </div>
+
+    </div><!-- /timeline-wrapper -->
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Архив</div>
+      <h2 class="section-title">Галерея</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="./images/1.webp"  alt="Фото" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/2.jpeg"  alt="Фото" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/3.jpeg"  alt="Фото" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/4.jpeg"  alt="Фото" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/5.jpeg"  alt="Фото" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/6.jpg"   alt="Страница 1"  onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/7.jpg"   alt="Страница 2"  onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/8.jpg"   alt="Страница 3"  onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/9.jpg"   alt="Страница 4"  onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/10.jpg"  alt="Страница 5"  onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/11.jpg"  alt="Страница 6"  onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/12.jpg"  alt="Страница 7"  onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/13.jpg"  alt="Страница 8"  onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/14.jpg"  alt="Страница 9"  onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/15.jpg"  alt="Страница 10" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/16.jpg"  alt="Страница 11" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/17.jpg"  alt="Страница 12" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/18.jpg"  alt="Страница 13" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/19.jpg"  alt="Страница 14" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/20.jpg"  alt="Страница 15" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/21.jpg"  alt="Страница 16" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/22.jpg"  alt="Страница 17" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/23.jpg"  alt="Страница 18" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/24.jpg"  alt="Страница 19" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/25.jpg"  alt="Страница 20" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/26.jpg"  alt="Страница 21" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/27.jpg"  alt="Страница 22" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/28.jpg"  alt="Страница 23" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/29.jpg"  alt="Страница 24" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/30.jpg"  alt="Страница 25" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/31.jpg"  alt="Страница 26" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/32.jpg"  alt="Страница 27" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/33.jpg"  alt="Страница 28" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/34.jpg"  alt="Страница 29" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/Karta1.jpeg" alt="Карта 1" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/Karta2.jpeg" alt="Карта 2" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/Karta3.jpeg" alt="Карта 3" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+      <div class="gallery-item"><img src="./images/Karta4.jpeg" alt="Карта 4" onclick="openLightbox(this.src,this.alt)" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMORIAL -->
+<section id="memorial">
+  <div class="container">
+    <div class="memorial-inner">
+      <div class="memorial-icon">✦</div>
+      <h2 class="memorial-title">Память</h2>
+      <p class="memorial-text">Этот дневник — не просто военный документ. Это голос человека, который писал о Блоке в траншее, спорил о поэзии под артиллерийским огнём, скучал по «чижику» в госпитале и верил, что жизнь — это нечто весомое в этом мире. Шелковников Сергей Сергеевич прошёл путь от Торопца до Пруссии. Он выжил. И оставил нам эти страницы.</p>
+      <div class="memorial-quote">
+        <blockquote>«Испугался ли я смерти? — Нет, не испугался, но я испугался того, что придётся умереть, не исполнив всего что хотел.»</blockquote>
+        <cite>— Шелковников С.С., 3 марта 1944 г.</cite>
+      </div>
+      <p class="memorial-text">Война оставляет неизгладимый отпечаток на всём. Но и человек оставляет свой след — в словах, написанных карандашом на холоде, в окопе, при свете коптилки. Пока эти слова живут — живёт и он.</p>
+      <a href="./Dnevnik.pdf" class="btn-download" target="_blank" rel="noopener">Скачать дневник (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Дневник Шелковникова Сергея Сергеевича &nbsp;·&nbsp; 1943–1945 &nbsp;·&nbsp; Память о Великой Отечественной войне</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения">
+  <div id="lb-close" onclick="closeLightbox()" title="Закрыть (Esc)">✕</div>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-caption"></div>
+</div>
+
+<script>
+// Mobile nav
+const burger = document.getElementById('navBurger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  burger.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Lightbox
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbCap = document.getElementById('lb-caption');
+
+function openLightbox(src, caption) {
+  lbImg.src = src;
+  lbCap.textContent = caption || '';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lb.classList.remove('open');
+  lbImg.src = '';
+  document.body.style.overflow = '';
+}
+
+lb.addEventListener('click', function(e) {
+  if (e.target === lb) closeLightbox();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// Smooth reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.timeline-entry, .route-card, .gallery-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
